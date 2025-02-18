@@ -50,7 +50,7 @@ def decode_message(image_path, password):
             print("❌ No hidden message found!")
     except Exception as e:
         print(f"❌ Error: {e}")
-image_path = r"C:\Users\admin\IMG-20220709-WA0003.jpg" 
+image_path = r"Steganography/IMG-20220709-WA0003.jpg" 
 password = "your_password_here"
 secret_message = "This is a secret message"
 encode_message(image_path, secret_message, password)
