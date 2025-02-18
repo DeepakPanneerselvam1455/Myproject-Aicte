@@ -12,17 +12,17 @@ def encode_message(image_path, secret_message, password, output_path="encryptedI
             return
         secret_message += "###" 
         ascii_values = text_to_ascii(secret_message)
+        
         rows, cols, _ = img.shape
         index = 0
         for i in range(rows):
             for j in range(cols):
-                for k in range(3):  # RGB channels
+                for k in range(3):
                     if index < len(ascii_values):
-                        img[i, j, k] = ascii_values[index]  # Store ASCII value
+                        img[i, j, k] = ascii_values[index]
                         index += 1
         cv2.imwrite(output_path, img)
         print(f"✅ Message encoded successfully and saved as: {output_path}")
-        os.system(f"start {output_path}")
     except Exception as e:
         print(f"❌ Error: {e}")
 def decode_message(image_path, password):
@@ -31,7 +31,7 @@ def decode_message(image_path, password):
         if img is None:
             print("❌ Error: Image not found!")
             return
-        input_password = input("Enter passcode for Decryption: ")
+        input_password = password
         if input_password != password:
             print("❌ YOU ARE NOT AUTHORIZED!")
             return
@@ -40,17 +40,18 @@ def decode_message(image_path, password):
         for i in range(rows):
             for j in range(cols):
                 for k in range(3):
-                    char = chr(img[i, j, k])
-                    if char == '#' and ''.join(message_ascii[-2:]) == "##":
-                        message_ascii = message_ascii[:-2]  # Remove delimiter
-                        print("🔓 Decryption message:", ascii_to_text(message_ascii))
-                        return
-                    message_ascii.append(char)
-        print("❌ No hidden message found!")
+                    message_ascii.append(img[i, j, k])
+        decoded_message = ascii_to_text(message_ascii)
+        delimiter = '###'
+        if delimiter in decoded_message:
+            decoded_message = decoded_message[:decoded_message.index(delimiter)]
+            print("🔓 Decryption message:", decoded_message)
+        else:
+            print("❌ No hidden message found!")
     except Exception as e:
         print(f"❌ Error: {e}")
-image_path = r"IMG-20220709-WA0003.jpg"
-password = input("Set a passcode: ")
-secret_message = input("Enter secret message: ")
+image_path = r"C:\Users\admin\IMG-20220709-WA0003.jpg" 
+password = "your_password_here"
+secret_message = "This is a secret message"
 encode_message(image_path, secret_message, password)
 decode_message("encryptedImage.jpg", password)
