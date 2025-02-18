@@ -1,0 +1,72 @@
+# 🔐 Image Steganography with Password Protection 🔒
+A Python-based **Image Steganography** tool that enables you to **hide secret messages** within an image file. This project also integrates **password protection** to ensure that only authorized users can decrypt and access the hidden message.
+
+## 🚀 Features
+- **Encode a secret message** into an image (e.g., `.jpg`, `.png`).
+- **Password protection** for secure message retrieval.
+- Customizable **end delimiter** (`###`) to mark the end of the hidden message.
+- Simple to use with pre-defined secret messages and passwords.
+
+## 🛠️ Requirements
+This project requires the following Python libraries:
+- [**OpenCV**](https://opencv.org/) for image manipulation.
+- [**NumPy**](https://numpy.org/) for efficient numerical operations.
+
+### Installation:
+You can easily install the required libraries using pip:
+```bash
+pip install opencv-python
+pip install numpy
+
+
+🔍 How It Works
+1. Encoding the Message:
+The secret message is converted to ASCII values.
+These values are then encoded into the RGB channels of an image, effectively hiding the message.
+A unique delimiter (###) is added to mark the end of the hidden message.
+  
+2. Decoding the Message:
+The encoded image is read and the pixel values are checked for hidden ASCII values.
+The message is extracted by looking for the end delimiter (###) to stop reading the hidden data.
+  
+3. Password Protection:
+The encoding and decoding process is password-protected.
+Only users with the correct password can decode the hidden message.
+  
+🎯 How to Use
+1. Encoding:
+Set the image path, secret message, and password in the script.
+The encoded image will be saved as encryptedImage.jpg.
+2. Decoding:
+To retrieve the hidden message, simply enter the correct password and the message will be displayed.
+  
+Example Usage:
+# Set the image path, secret message, and password
+image_path = r"C:\path\to\your\image.jpg"
+password = "your_password_here"  # Set your password here
+# Encoding the message
+secret_message = "This is a secret message"  # Set your secret message here
+encode_message(image_path, secret_message, password)
+# Decoding the message
+decode_message("encryptedImage.jpg", password)
+  
+The Process:
+Encode the message into an image.
+Decrypt the hidden message with the correct passcode.
+  
+🎨 Why Use This?
+Steganography is an amazing way to securely hide messages within an image, making it nearly impossible to detect.
+This method allows you to password-protect sensitive information in a fun and creative way!
+Perfect for privacy enthusiasts, security experts, or anyone looking to add an extra layer of protection to their digital communication.
+  
+⚙️ Important Notes
+Make sure the image path is correct.
+The password for encoding and decoding must match.
+This technique works best with lossless image formats (e.g., .png) to ensure the encoded message stays intact.
+  
+📦 License
+This project is licensed under the MIT License - see the LICENSE file for more details.
+
+🌟 Acknowledgements
+Special thanks to the OpenCV library for making image processing easy and efficient.
+The code uses NumPy for its fast array operations, making this project possible.
